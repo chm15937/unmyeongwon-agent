@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>운명원 댓글 에이전트</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand">
+    <span class="logo">運</span>
+    <div>
+      <h1>운명원 댓글 에이전트</h1>
+      <p>영상을 불러오고 → 고르고 → 버튼 한 번에 댓글을 답니다</p>
+    </div>
+  </div>
+  <div class="chips" id="chips"></div>
+</header>
+
+<div class="notice" id="setupNotice" hidden></div>
+
+<main class="grid">
+  <!-- ① 영상 불러오기 -->
+  <section class="col" id="col1">
+    <div class="col-head"><span class="num">1</span><h2>영상 불러오기</h2></div>
+    <div class="row">
+      <input id="keyword" list="kwlist" placeholder="키워드 (비우면 기본 키워드)">
+      <datalist id="kwlist"></datalist>
+      <button class="btn primary" id="btnLoad">영상 불러오기</button>
+    </div>
+    <div class="row">
+      <input id="link" placeholder="또는 유튜브 링크 붙여넣기">
+      <button class="btn" id="btnLink">추가</button>
+    </div>
+    <label class="toggle" title="최근 36시간 영상 중 조건에 맞는 것만 보여줍니다">
+      <input type="checkbox" id="onlyRising" checked>
+      <span>🔥 <b>뜨기 직전 영상만</b> <small id="risingRule">조회수 1,000~5,000 · 시간당 150회↑</small></span>
+    </label>
+    <div class="list-meta" id="listMeta"></div>
+    <div class="list" id="list">
+      <div class="empty">[영상 불러오기]를 누르면<br>최신 연애 영상이 여기에 나와요</div>
+    </div>
+  </section>
+
+  <!-- ② 영상 선택 -->
+  <section class="col" id="col2">
+    <div class="col-head"><span class="num">2</span><h2>영상 선택 · 댓글 초안</h2></div>
+    <div id="detail">
+      <div class="empty tall">왼쪽 목록에서 영상을 고르면<br>AI가 <b>영상 속 고민 한 줄</b>과 <b>댓글 초안</b>을 만들어요</div>
+    </div>
+  </section>
+
+  <!-- ③ 댓글 달기 -->
+  <section class="col" id="col3">
+    <div class="col-head"><span class="num">3</span><h2>댓글 달기</h2></div>
+    <label class="lbl">어느 계정으로 달까요?</label>
+    <div class="profiles" id="profiles"></div>
+    <button class="btn primary big full" id="btnPost" disabled>댓글 달기</button>
+    <p class="hint" id="postHint">먼저 ②에서 댓글 초안을 확인하세요</p>
+    <ol class="steps" id="steps"></ol>
+    <div id="result"></div>
+    <p class="rules" id="rules"></p>
+  </section>
+</main>
+
+<section class="history">
+  <div class="col-head"><h2>게시 기록</h2><span class="sub">어느 영상에 · 어느 프로필로 · 무슨 댓글을 · 성공/실패</span>
+    <button class="btn small" id="btnOrder" style="margin-left:auto">최신순 ↓</button></div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>시간</th><th>영상</th><th>프로필</th><th>댓글</th><th>결과</th><th></th></tr></thead>
+      <tbody id="history"><tr><td colspan="6" class="empty">아직 기록이 없어요</td></tr></tbody>
+    </table>
+  </div>
+</section>
+
+<script src="/static/app.js"></script>
+</body>
+</html>

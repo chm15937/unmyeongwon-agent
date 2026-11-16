@@ -1,0 +1,43 @@
+# 운명원 댓글 에이전트 설정
+# 이 파일은 저장소에 올라가도 되는 값만 둡니다. API 키는 .env 에 넣으세요.
+
+# 내 컴퓨터의 크롬 프로필 (프로필마다 다른 구글 계정으로 로그인)
+profiles: [유튜브1, 유튜브2, 유튜브3]
+
+# 크롬 프로필 폴더 위치. 비워 두면 %LOCALAPPDATA%\unmyeongwon-agent\chrome-profiles 를 씁니다.
+# (OneDrive 폴더 안에 두면 수백 MB 캐시가 동기화되므로 기본값을 권장)
+profiles_dir: ""
+
+comment:
+  min_chars: 40
+  max_chars: 120
+  brand: 운명원
+  # 한 글자씩 입력할 때 글자 사이 간격(ms)
+  typing_delay_ms: 90
+
+limits:
+  daily_max_comments: 10   # 하루 게시 상한 (성공 + 확인 실패 포함)
+
+search:
+  # [영상 불러오기]에서 쓰는 기본 키워드. 대시보드에서 바꿔 검색할 수도 있습니다.
+  keywords: ["연애 고민", "연애 심리", "연애 상담", "짝사랑", "재회"]
+  days: 7            # 최근 며칠 안에 올라온 영상만
+  max_results: 24
+
+rising:
+  # '뜨기 직전 영상' 조건 (가점). [영상 불러오기]에서 '뜨기 직전 영상만'을 켜면(기본) 이 조건으로 거릅니다.
+  keywords: ["연애", "연애 고민", "연애 심리", "짝사랑", "재회 연애", "썸"]
+  min_views: 1000
+  max_views: 5000
+  min_views_per_hour: 150
+  # 5,000회 ÷ 시간당 150회 ≈ 33시간 → 그보다 오래된 영상은 조건을 만족할 수 없으므로 36시간 안에서만 찾습니다.
+  lookback_hours: 36
+  cache_minutes: 10   # 같은 검색은 10분간 다시 호출하지 않음 (YouTube API 할당량 절약)
+
+ai:
+  model: claude-opus-5-5
+  effort: medium
+  max_attempts: 3   # 규칙 검사를 통과할 때까지 다시 생성하는 최대 횟수
+
+browser:
+  keep_open_seconds: 4   # 게시 확인 후 창을 닫기까지 기다리는 시간 (시연용)
